@@ -5,7 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	pingHandler "github.com/montoias/koios-recommendations/delivery/api/handlers/ping"
+	suggestionsHandler "github.com/montoias/koios-recommendations/delivery/api/handlers/suggestions"
 	"github.com/montoias/koios-recommendations/delivery/api/middleware"
+	"github.com/montoias/koios-recommendations/infrastructure/tmdb"
 )
 
 // App is the API for the Microservice
@@ -14,7 +16,7 @@ type App struct {
 }
 
 // New returns new instance of the MicroService App
-func New(crossOriginDomains string) *App {
+func New(crossOriginDomains string, client *tmdb.Client) *App {
 	router := gin.Default()
 	router.Use(gin.Recovery())
 	router.Use(middleware.Errors())
@@ -22,6 +24,7 @@ func New(crossOriginDomains string) *App {
 
 	// Ping-Pong endpoint
 	router.GET("/ping", pingHandler.Ping())
+	router.GET("/suggestions", suggestionsHandler.Suggestions(client))
 
 	return &App{
 		router: router,

@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/karlkfi/inject"
 	app "github.com/montoias/koios-recommendations/delivery/api/app"
+	"github.com/montoias/koios-recommendations/infrastructure/tmdb"
 )
 
 // NewDependencyGraph returns an initialized Dependency Graph.
@@ -23,7 +24,11 @@ type Dependencies struct {
 	// App
 	App *app.App
 
+	// clients
+	TMDBClient *tmdb.Client
+
 	// configs
+	TMDBApiKey string
 
 	// http configs
 	CrossOriginDomains string
@@ -37,12 +42,22 @@ func (dependencies *Dependencies) ResolveAll() {
 
 // DefineAll defines how all structures should be created
 func (dependencies *Dependencies) DefineAll() {
+	// clients
+	dependencies.graph.Define(
+		&dependencies.TMDBClient,
+		inject.NewProvider(
+			tmdb.New,
+			&dependencies.TMDBApiKey,
+		),
+	)
+
 	// app
 	dependencies.graph.Define(
 		&dependencies.App,
 		inject.NewProvider(
 			app.New,
 			&dependencies.CrossOriginDomains,
+			&dependencies.TMDBClient,
 		),
 	)
 }

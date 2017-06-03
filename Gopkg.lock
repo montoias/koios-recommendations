@@ -8,18 +8,6 @@
   version = "v0.11.5"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/sts"]
-  revision = "4d7eba91c40f1bd38d04fd80131e475c654e8de5"
-
-[[projects]]
-  name = "github.com/davecgh/go-spew"
-  packages = ["spew"]
-  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
-  version = "v1.1.0"
-
-[[projects]]
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
   revision = "629574ca2a5df945712d3079857300b5e4da0236"
@@ -30,12 +18,6 @@
   packages = [".","binding","render"]
   revision = "e2212d40c62a98b388a5eb48ecbdcf88534688ba"
   version = "v1.1.4"
-
-[[projects]]
-  name = "github.com/go-ini/ini"
-  packages = ["."]
-  revision = "d3de07a94d22b4a0972deb4b96d790c2c0ce8333"
-  version = "v1.28.0"
 
 [[projects]]
   branch = "master"
@@ -54,12 +36,6 @@
   packages = ["."]
   revision = "97b4a9da79331dfa2b6d35f4cdd1e50f5148859c"
   version = "1.0.0"
-
-[[projects]]
-  name = "github.com/jmespath/go-jmespath"
-  packages = ["."]
-  revision = "3433f3ea46d9f8019119e7dd41274e112a2359a9"
-  version = "0.2.2"
 
 [[projects]]
   branch = "master"
@@ -104,10 +80,10 @@
   version = "v1.0.0"
 
 [[projects]]
-  name = "github.com/pmezard/go-difflib"
-  packages = ["difflib"]
-  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
-  version = "v1.0.0"
+  name = "github.com/ryanbradynd05/go-tmdb"
+  packages = ["."]
+  revision = "5ab02a0655163a69d643172556bda2b05c676e44"
+  version = "1.0.0"
 
 [[projects]]
   branch = "master"
@@ -141,36 +117,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/stretchr/objx"
-  packages = ["."]
-  revision = "1a9d0bb9f541897e62256577b352fdbc1fb4fd94"
-
-[[projects]]
-  name = "github.com/stretchr/testify"
-  packages = ["assert","mock"]
-  revision = "69483b4bd14f5845b5a1e55bca19e954e827f1d0"
-  version = "v1.1.4"
-
-[[projects]]
-  branch = "dev"
-  name = "github.com/uniplaces/dynamodb-repositories"
-  packages = ["currencies","currencies/mocks","currencies/schema","service","service/config"]
-  revision = "3195572a0301d5c7d4bf4416def6804e2e083e93"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/montoias/koios-recommendations"
-  packages = ["config","config/api","config/cli","delivery/api/app","delivery/api/handlers/ping","delivery/api/middleware","delivery/api/payload","delivery/cli/app","delivery/cli/daemon","delivery/cli/handlers/example","dto/example","infrastructure/config/aws","infrastructure/repository/dynamodb/examplecurrencies","infrastructure/repository/dynamodb/examplecurrencies/transformer"]
-  revision = "4265b557c65808873100fcd80c97e1b593b244f3"
-
-[[projects]]
-  name = "github.com/urfave/cli"
-  packages = ["."]
-  revision = "0bdeddeeb0f650497d603c4ad7b20cfe685682f6"
-  version = "v1.19.1"
-
-[[projects]]
-  branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
   revision = "e4fa1c5465ad6111f206fc92186b8c83d64adbe1"
@@ -185,7 +131,7 @@
   branch = "master"
   name = "golang.org/x/text"
   packages = ["internal/gen","internal/triegen","internal/ucd","transform","unicode/cldr","unicode/norm"]
-  revision = "4ee4af566555f5fbe026368b75596286a312663a"
+  revision = "ccbd3f7822129ff389f8ca4858a9b9d4d910531c"
 
 [[projects]]
   name = "gopkg.in/go-playground/validator.v8"
@@ -202,6 +148,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f5ed028f21dd2ac6bc8d4bf29e9aafad0335956f9c56ef945b439ac44f555e46"
+  inputs-digest = "1b9aae788978d6a917838c5c1e2aebf3d5f1edb80bf87dd52d1799162cfbd2af"
   solver-name = "gps-cdcl"
   solver-version = 1

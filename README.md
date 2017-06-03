@@ -20,19 +20,14 @@ $ ./environment.sh
 ```
 
 ### Building the binary
-The main package is at delivery layer, as the delivery layers are api and cli, to compile the application enter the
-needed layer and build the project.
-
 ```bash
 $ cd delivery/api && go build -v
-$ cd delivery/cli && go build -v
 ```
 
 ### Run the code
 To run without building the binary:
 ```bash
 $ go run delivery/api/main.go
-$ go run delivery/cli/main.go
 ```
 
 ### Testing

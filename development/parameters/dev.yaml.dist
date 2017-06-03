@@ -5,3 +5,6 @@ app:
   host: ""
   mode: "release"
   cross_origin_domain: "*"
+
+tmdb:
+    api_key: "d0f5369c3697ab83669aa8c51abca8ba"

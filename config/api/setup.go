@@ -11,10 +11,12 @@ func SetupDependencies(config *config.MainConfig) *Dependencies {
 
 	origins := config.GetString("app.cross_origin_domain")
 	defaultTimeout := config.GetInt("app.default_timeout")
+	tmdbApiKey := config.GetString("tmdb.api_key")
 
 	dependencies := NewDependencyGraph()
 	dependencies.CrossOriginDomains = origins
 	dependencies.DefaultTimeout = defaultTimeout
+	dependencies.TMDBApiKey = tmdbApiKey
 	dependencies.DefineAll()
 	dependencies.ResolveAll()
 
