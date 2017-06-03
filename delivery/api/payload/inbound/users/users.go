@@ -1,8 +1,8 @@
 package users
 
-// Users schema
-type Users struct {
-	Items []User `json:"users"`
+// UsersRequest schema
+type UsersRequest struct {
+	Users []User `json:"users"`
 }
 
 // User schema

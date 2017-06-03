@@ -7,7 +7,6 @@ import (
 	pingHandler "github.com/montoias/koios-recommendations/delivery/api/handlers/ping"
 	suggestionsHandler "github.com/montoias/koios-recommendations/delivery/api/handlers/suggestions"
 	"github.com/montoias/koios-recommendations/delivery/api/middleware"
-	"github.com/montoias/koios-recommendations/infrastructure/tmdb"
 )
 
 // App is the API for the Microservice
@@ -16,15 +15,14 @@ type App struct {
 }
 
 // New returns new instance of the MicroService App
-func New(crossOriginDomains string, client *tmdb.Client) *App {
+func New(crossOriginDomains string, interactor suggestionsHandler.SuggestionsInteractor) *App {
 	router := gin.Default()
 	router.Use(gin.Recovery())
 	router.Use(middleware.Errors())
 	router.Use(middleware.Cors(crossOriginDomains))
 
-	// Ping-Pong endpoint
 	router.GET("/ping", pingHandler.Ping())
-	router.GET("/suggestions", suggestionsHandler.Suggestions(client))
+	router.POST("/suggestions", suggestionsHandler.Suggestions(interactor))
 
 	return &App{
 		router: router,

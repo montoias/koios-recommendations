@@ -2,8 +2,11 @@ package api
 
 import (
 	"github.com/karlkfi/inject"
-	app "github.com/montoias/koios-recommendations/delivery/api/app"
-	"github.com/montoias/koios-recommendations/infrastructure/tmdb"
+	"github.com/montoias/koios-recommendations/delivery/api/app"
+	"github.com/montoias/koios-recommendations/delivery/api/handlers/suggestions"
+	"github.com/montoias/koios-recommendations/usecase"
+	"github.com/montoias/koios-recommendations/usecase/client/tmdb"
+	gotmdb "github.com/ryanbradynd05/go-tmdb"
 )
 
 // NewDependencyGraph returns an initialized Dependency Graph.
@@ -21,11 +24,14 @@ func NewDependencyGraph() *Dependencies {
 type Dependencies struct {
 	graph inject.Graph
 
-	// App
+	// app
 	App *app.App
 
 	// clients
-	TMDBClient *tmdb.Client
+	TMDBClient tmdb.Client
+
+	// interactors
+	SuggestionsInteractor suggestions.SuggestionsInteractor
 
 	// configs
 	TMDBApiKey string
@@ -43,13 +49,7 @@ func (dependencies *Dependencies) ResolveAll() {
 // DefineAll defines how all structures should be created
 func (dependencies *Dependencies) DefineAll() {
 	// clients
-	dependencies.graph.Define(
-		&dependencies.TMDBClient,
-		inject.NewProvider(
-			tmdb.New,
-			&dependencies.TMDBApiKey,
-		),
-	)
+	dependencies.graph.Define(&dependencies.TMDBClient, inject.NewProvider(gotmdb.Init, &dependencies.TMDBApiKey))
 
 	// app
 	dependencies.graph.Define(
@@ -57,6 +57,15 @@ func (dependencies *Dependencies) DefineAll() {
 		inject.NewProvider(
 			app.New,
 			&dependencies.CrossOriginDomains,
+			&dependencies.SuggestionsInteractor,
+		),
+	)
+
+	// interactors
+	dependencies.graph.Define(
+		&dependencies.SuggestionsInteractor,
+		inject.NewProvider(
+			usecase.NewSuggestionsInteractor,
 			&dependencies.TMDBClient,
 		),
 	)
