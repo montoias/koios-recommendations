@@ -1,0 +1,7 @@
+env: "staging"
+
+app:
+  default_timeout: 20
+  host: ""
+  mode: "release"
+  cross_origin_domain: "*"
