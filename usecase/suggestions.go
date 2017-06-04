@@ -4,7 +4,6 @@ import (
 	"github.com/montoias/koios-recommendations/dto/movies"
 	"github.com/montoias/koios-recommendations/dto/users"
 	"github.com/montoias/koios-recommendations/usecase/client/tmdb"
-	gotmdb "github.com/ryanbradynd05/go-tmdb"
 )
 
 // SuggestionsInteractor provides methods for suggestions
@@ -19,39 +18,39 @@ func NewSuggestionsInteractor(client tmdb.Client) *SuggestionsInteractor {
 
 // CreateSuggestions creates a list of movie suggestions based on a list of users
 func (interactor SuggestionsInteractor) CreateSuggestions(users users.Users) (movies.Movies, error) {
-	var zeroValueMovieShort gotmdb.MovieShort
 	var usersMovies []movies.Movie
 	for _, u := range users.Items {
 		for _, m := range u.Movies {
-			movieShort, err := interactor.searchMovie(m)
+			movie, totalResults, err := interactor.searchMovie(m)
 			if err != nil {
 				return movies.Movies{}, err
 			}
 
-			if movieShort == zeroValueMovieShort {
+			if totalResults == 0 {
 				continue
 			}
 
-			movieDto, err := tmdb.MovieShortToMovieDto(movieShort)
-			if err != nil {
-				return movies.Movies{}, err
-			}
-			usersMovies = append(usersMovies, movieDto)
+			usersMovies = append(usersMovies, movie)
 		}
 	}
 
 	return movies.Movies{Items: usersMovies}, nil
 }
 
-func (interactor SuggestionsInteractor) searchMovie(movie users.Movie) (gotmdb.MovieShort, error) {
-	results, err := interactor.client.SearchMovie(string(movie), nil)
+func (interactor SuggestionsInteractor) searchMovie(movie users.Movie) (movies.Movie, int, error) {
+	results, err := interactor.client.SearchMulti(string(movie), nil)
 	if err != nil {
-		return gotmdb.MovieShort{}, err
+		return movies.Movie{}, results.TotalResults, err
 	}
 
 	if results.TotalResults == 0 {
-		return gotmdb.MovieShort{}, nil
+		return movies.Movie{}, results.TotalResults, nil
 	}
 
-	return results.Results[0], nil
+	movieResult, err := tmdb.MovieResultToMovieDto(tmdb.MovieResult(results.Results[0]))
+	if err != nil {
+		return movies.Movie{}, results.TotalResults, err
+	}
+
+	return movieResult, results.TotalResults, nil
 }

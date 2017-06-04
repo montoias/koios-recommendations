@@ -3,6 +3,7 @@ package suggestions
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -16,6 +17,7 @@ func Suggestions(interactor SuggestionsInteractor) gin.HandlerFunc {
 	return func(ginContext *gin.Context) {
 		body, err := ioutil.ReadAll(ginContext.Request.Body)
 		if err != nil {
+			log.Printf("%s\n", err)
 			ginContext.JSON(http.StatusBadRequest, payload.Error{Message: "unable to read request body"})
 
 			return
@@ -23,6 +25,7 @@ func Suggestions(interactor SuggestionsInteractor) gin.HandlerFunc {
 
 		var request users.UsersRequest
 		if err = json.Unmarshal(body, &request); err != nil {
+			log.Printf("%s\n", err)
 			ginContext.JSON(http.StatusBadRequest, payload.Error{Message: "unable to unmarshal request"})
 
 			return
@@ -30,6 +33,7 @@ func Suggestions(interactor SuggestionsInteractor) gin.HandlerFunc {
 
 		usersDto := users.ToDto(request)
 		if err != nil {
+			log.Printf("%s\n", err)
 			ginContext.JSON(http.StatusInternalServerError, payload.Error{Message: "unable to process request"})
 
 			return
@@ -37,6 +41,7 @@ func Suggestions(interactor SuggestionsInteractor) gin.HandlerFunc {
 
 		suggestedMovies, err := interactor.CreateSuggestions(usersDto)
 		if err != nil {
+			log.Printf("%s\n", err)
 			ginContext.JSON(http.StatusInternalServerError, payload.Error{Message: "unable to create suggestions"})
 
 			return
@@ -45,6 +50,7 @@ func Suggestions(interactor SuggestionsInteractor) gin.HandlerFunc {
 		moviesResult := movies.ToSchema(suggestedMovies)
 		result, err := json.Marshal(moviesResult)
 		if err != nil {
+			log.Printf("%s\n", err)
 			ginContext.JSON(http.StatusInternalServerError, payload.Error{Message: "unable to provide suggestions"})
 
 			return

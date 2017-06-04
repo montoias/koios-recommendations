@@ -80,10 +80,10 @@
   version = "v1.0.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/ryanbradynd05/go-tmdb"
   packages = ["."]
-  revision = "5ab02a0655163a69d643172556bda2b05c676e44"
-  version = "1.0.0"
+  revision = "e052aaf19567df58b369c42adc5a0380b0cc3a33"
 
 [[projects]]
   branch = "master"
@@ -148,6 +148,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1b9aae788978d6a917838c5c1e2aebf3d5f1edb80bf87dd52d1799162cfbd2af"
+  inputs-digest = "b042b5d74311ce75e124292c5dc28f1f40c55effd6ea931eae66ea1935a1a73d"
   solver-name = "gps-cdcl"
   solver-version = 1
