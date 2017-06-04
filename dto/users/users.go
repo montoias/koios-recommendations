@@ -10,5 +10,6 @@ type Users struct {
 
 // User is dto structure for User
 type User struct {
+	ID     string
 	Movies []Movie
 }

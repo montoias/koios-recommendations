@@ -7,5 +7,6 @@ type UsersRequest struct {
 
 // User schema
 type User struct {
+	ID     string   `json:"id"`
 	Movies []string `json:"movies"`
 }

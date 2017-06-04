@@ -40,9 +40,7 @@ func (interactor SuggestionsInteractor) CreateSuggestions(users users.Users) (mo
 		}
 	}
 
-	return movies.Movies{
-		Items: usersMovies,
-	}, nil
+	return movies.Movies{Items: usersMovies}, nil
 }
 
 func (interactor SuggestionsInteractor) searchMovie(movie users.Movie) (gotmdb.MovieShort, error) {

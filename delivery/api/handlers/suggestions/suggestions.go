@@ -11,7 +11,7 @@ import (
 	"github.com/montoias/koios-recommendations/delivery/api/payload/outbound/movies"
 )
 
-// Ping allows to perform health check
+// Suggestions allows to request suggestions
 func Suggestions(interactor SuggestionsInteractor) gin.HandlerFunc {
 	return func(ginContext *gin.Context) {
 		body, err := ioutil.ReadAll(ginContext.Request.Body)

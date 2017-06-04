@@ -9,7 +9,7 @@
 
 # Dependency managers
 .glide/
-*vendor*/
+vendor/
 
 # IDE
 .idea/

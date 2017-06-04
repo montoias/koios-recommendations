@@ -16,9 +16,9 @@ const (
 // Client is interface for the themoviedb.org API client
 type Client interface {
 	SearchMovie(name string, options map[string]string) (*gotmdb.MovieSearchResults, error)
-	GetMovieInfo(id int, options map[string]string) (*gotmdb.Movie, error)
 }
 
+// MovieShortToMovieDto transforms gotmdb MovieShort to Movie Dto
 func MovieShortToMovieDto(short gotmdb.MovieShort) (movies.Movie, error) {
 	releaseDate, err := time.Parse(timeFormatLayout, short.ReleaseDate)
 	if err != nil {

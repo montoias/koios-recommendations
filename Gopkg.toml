@@ -1,19 +1,7 @@
 [[constraint]]
-  branch = "master"
-  name = "github.com/aws/aws-sdk-go"
-
-[[constraint]]
   name = "github.com/itsjamie/gin-cors"
   version = "1.0.0"
 
 [[constraint]]
   branch = "master"
   name = "github.com/spf13/viper"
-
-[[constraint]]
-  branch = "dev"
-  name = "github.com/uniplaces/dynamodb-repositories"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/montoias/koios-recommendations"
